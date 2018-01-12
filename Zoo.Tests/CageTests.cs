@@ -24,13 +24,12 @@ namespace Zoo.Tests
         }
 
         [TestMethod]
-        public void CanAndAddMammalToSteelCage()
+        public void CanAndAddAnimalToSteelCage()
         {
             Cage cage = new SteelCage();
             Animal animal = new Dog(1)
             {
                 Name = "Ciucia",
-
             };
 
             cage.PutAnimal(animal);
@@ -40,7 +39,7 @@ namespace Zoo.Tests
         }
 
         [TestMethod]
-        public void CanFreeAddAndFreeMammalFromStealCage()
+        public void CanAddAndFreeAnimalFromStealCage()
         {
             Cage cage = new SteelCage();
             Animal animal = new Dog(1)
@@ -85,6 +84,19 @@ namespace Zoo.Tests
             var animalDetails = cage.ShowAnimal();
 
             Assert.IsFalse(string.IsNullOrEmpty(animalDetails));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException), "Should throw exception when add second animal")]
+        public void ShouldThrowExceptionWhenAddTwoAnimalsToCage()
+        {
+            Cage cage = new SteelCage();
+
+            Animal animal1 = new Lizard(1);           
+            cage.PutAnimal(animal1);
+
+            Animal animal2 = new Dog(1);
+            cage.PutAnimal(animal2);
         }
     }
 }
